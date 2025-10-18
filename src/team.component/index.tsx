@@ -155,7 +155,7 @@ function MeetTheTeam() {
   const prevIndex = getWrappedIndex(currentIndex - 1);
   const nextIndex = getWrappedIndex(currentIndex + 1);
 
-  const getCardPosition = (position: "prev" | "current" | "next") => {
+  const _getCardPosition = (position: "prev" | "current" | "next") => {
     const positions = {
       prev: { x: 200, scale: 0.85, opacity: 0.6, zIndex: 1 },
       current: { x: 0, scale: 1, opacity: 1, zIndex: 10 },
