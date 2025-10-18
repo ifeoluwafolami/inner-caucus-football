@@ -1,0 +1,7 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-rock: "Rock Salt", "serif";
+  --font-mont: "Montserrat", "sans-serif";
+  --color-whitish: #f7f2df;
+}
