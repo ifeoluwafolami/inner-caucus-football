@@ -44,7 +44,7 @@ function App() {
 
       {/* Main Page */}
       <div 
-        className={`flex sm:hidden min-h-[450vh] w-full relative ${loading ? 'hidden' : ''}`}
+        className={`flex sm:hidden min-h-[430vh] w-full relative ${loading ? 'hidden' : ''}`}
         style={{
           backgroundImage: `url('/background.jpg')`,
           backgroundRepeat: 'repeat',

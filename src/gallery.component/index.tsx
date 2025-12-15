@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Marquee from 'react-marquee-slider';
 import * as motion from "motion/react-client";
 
 const GallerySection = () => {
@@ -25,6 +24,28 @@ const GallerySection = () => {
 
   return (
     <div className="w-full py-16 md:py-20 overflow-hidden bg-gradient-to-b from-transparent to-[#042915]/20">
+      {/* CSS Keyframes */}
+      <style>
+        {`
+          @keyframes scroll-rtl {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-50%);
+            }
+          }
+          
+          .animate-scroll-rtl {
+            animation: scroll-rtl 12s linear infinite;
+          }
+          
+          .marquee-container:hover .animate-scroll-rtl {
+            animation-play-state: paused;
+          }
+        `}
+      </style>
+
       {/* Title */}
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
@@ -35,9 +56,6 @@ const GallerySection = () => {
       >
         <h2 className="font-rock text-4xl md:text-5xl lg:text-6xl font-bold text-amber-700 mb-3">
           Gallery
-          {/* <span className="text-[#F7F2DF] text-base md:text-lg block mt-3 font-normal font-mont uppercase tracking-wider">
-            Moments That Define Our Legacy
-          </span> */}
         </h2>
         {/* Call to Action */}
         <motion.div 
@@ -50,9 +68,6 @@ const GallerySection = () => {
             <p className="text-[#F7F2DF] font-mont text-xs mb-2 uppercase">
             Click any image to view full size
             </p>
-            {/* <p className="text-amber-700 font-mont text-xs uppercase tracking-widest">
-            "Chill. Play. Relive."
-            </p> */}
         </motion.div>
 
       {/* Modal for selected image */}
@@ -86,131 +101,98 @@ const GallerySection = () => {
       )}
       </motion.div>
 
-      {/* Speed Control
-      <div className="max-w-md mx-auto mb-8 px-4">
-        <div className="bg-[#042915] border border-amber-700/30 rounded-lg p-4 backdrop-blur-sm">
-          <label className="block text-[#F7F2DF] mb-2 font-mont text-sm">
-            Scroll Speed: {speed}
-          </label>
-          <input
-            type="range"
-            min="15"
-            max="60"
-            value={speed}
-            onChange={(e) => setSpeed(Number(e.target.value))}
-            className="w-full h-2 bg-amber-700/30 rounded-lg appearance-none cursor-pointer accent-amber-700"
-          />
-        </div>
-      </div> */}
-
-      <div className='flex flex-col items-center justify-center'>
+      <div className='flex flex-col items-center justify-center gap-3'>
         {/* First Marquee Row - Right to Left */}
-        <div style={{ height: "280px", maxWidth: "80vw", width: "100%", marginBottom: "12px" }}>
-            <Marquee
-            velocity={20}
-            direction="rtl"
-            scatterRandomly={false}
-            resetAfterTries={200}
-            onInit={() => null}
-            onFinish={() => null}
-            >
-            {firstRow.map((img, index) => (
-                <div
+        <div className="marquee-container w-full overflow-hidden">
+          <div className="flex animate-scroll-rtl">
+            {/* Duplicate the images 4 times for seamless loop */}
+            {[...firstRow, ...firstRow, ...firstRow, ...firstRow].map((img, index) => (
+              <div
                 key={`gallery-row1-${index}`}
-                className="mx-3 cursor-pointer"
+                className="flex-shrink-0 mx-3 cursor-pointer"
                 onClick={() => setSelectedImage(img)}
-                >
+              >
                 <div className="relative rounded-lg overflow-hidden shadow-xl border-2 border-amber-700/40 bg-[#042915] transition-transform duration-300 hover:scale-105">
-                    <div className="w-80 h-60 md:w-96 md:h-64 bg-gradient-to-br from-amber-900/20 to-[#042915] flex items-center justify-center">
+                  <div className="w-64 h-48 sm:w-80 sm:h-60 md:w-96 md:h-64 bg-gradient-to-br from-amber-900/20 to-[#042915] flex items-center justify-center">
                     {img.url ? (
-                        <img
+                      <img
                         src={img.url}
                         alt="Gallery"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-center"
                         onError={(e) => {
-                            e.currentTarget.style.display = 'none';
-                            const parent = e.currentTarget.parentElement;
-                            if (parent) {
+                          e.currentTarget.style.display = 'none';
+                          const parent = e.currentTarget.parentElement;
+                          if (parent) {
                             parent.innerHTML = `
-                                <div class="flex items-center justify-center h-full text-amber-700">
+                              <div class="flex items-center justify-center h-full text-amber-700">
                                 <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                                  <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
                                 </svg>
-                                </div>
+                              </div>
                             `;
-                            }
+                          }
                         }}
-                        />
+                      />
                     ) : (
-                        <div className="flex items-center justify-center h-full text-amber-700">
+                      <div className="flex items-center justify-center h-full text-amber-700">
                         <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                          <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
                         </svg>
-                        </div>
+                      </div>
                     )}
-                    </div>
+                  </div>
                 </div>
-                </div>
+              </div>
             ))}
-            </Marquee>
+          </div>
         </div>
 
         {/* Second Marquee Row - Right to Left */}
         {secondRow.length > 0 && (
-            <div style={{ height: "280px", maxWidth: "80vw", width: "100%" }}>
-            <Marquee
-                velocity={20}
-                direction="rtl"
-                scatterRandomly={false}
-                resetAfterTries={200}
-                onInit={() => null}
-                onFinish={() => null}
-            >
-                {secondRow.map((img, index) => (
+          <div className="marquee-container w-full overflow-hidden">
+            <div className="flex animate-scroll-rtl" style={{ animationDelay: '-10s' }}>
+              {/* Duplicate the images 4 times for seamless loop */}
+              {[...secondRow, ...secondRow, ...secondRow, ...secondRow].map((img, index) => (
                 <div
-                    key={`gallery-row2-${index}`}
-                    className="mx-3 cursor-pointer"
-                    onClick={() => setSelectedImage(img)}
+                  key={`gallery-row2-${index}`}
+                  className="flex-shrink-0 mx-3 cursor-pointer"
+                  onClick={() => setSelectedImage(img)}
                 >
-                    <div className="relative rounded-lg overflow-hidden shadow-xl border-2 border-amber-700/40 bg-[#042915] transition-transform duration-300 hover:scale-105">
-                    <div className="w-80 h-60 md:w-96 md:h-64 bg-gradient-to-br from-amber-900/20 to-[#042915] flex items-center justify-center">
-                        {img.url ? (
+                  <div className="relative rounded-lg overflow-hidden shadow-xl border-2 border-amber-700/40 bg-[#042915] transition-transform duration-300 hover:scale-105">
+                    <div className="w-64 h-48 sm:w-80 sm:h-60 md:w-96 md:h-64 bg-gradient-to-br from-amber-900/20 to-[#042915] flex items-center justify-center">
+                      {img.url ? (
                         <img
-                            src={img.url}
-                            alt="Gallery"
-                            className="w-full h-full object-cover"
-                            onError={(e) => {
+                          src={img.url}
+                          alt="Gallery"
+                          className="w-full h-full object-cover object-center"
+                          onError={(e) => {
                             e.currentTarget.style.display = 'none';
                             if (e.currentTarget.parentElement) {
-                                e.currentTarget.parentElement.innerHTML = `
+                              e.currentTarget.parentElement.innerHTML = `
                                 <div class="flex items-center justify-center h-full text-amber-700">
-                                    <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 20 20">
+                                  <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
-                                    </svg>
+                                  </svg>
                                 </div>
-                                `;
+                              `;
                             }
-                            }}
+                          }}
                         />
-                        ) : (
+                      ) : (
                         <div className="flex items-center justify-center h-full text-amber-700">
-                            <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
-                            </svg>
+                          </svg>
                         </div>
-                        )}
+                      )}
                     </div>
-                    </div>
+                  </div>
                 </div>
-                ))}
-            </Marquee>
+              ))}
             </div>
+          </div>
         )}
       </div>
-
-      
-
-      
     </div>
   );
 };

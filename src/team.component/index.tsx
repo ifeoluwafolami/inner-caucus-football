@@ -16,7 +16,7 @@ const teamMembers = [
     lastName: "Oki",
     nickname: "Legend/Veteran",
     dateOfBirth: "28-10",
-    imageUrl: "/football/femi.jpg",
+    imageUrl: "/football/femi.jpeg",
   },
   {
     id: 3,
@@ -40,7 +40,7 @@ const teamMembers = [
     lastName: "Ilori",
     nickname: "Don",
     dateOfBirth: "10-08",
-    imageUrl: "/football/ilori.jpg",
+    imageUrl: "/football/ilori.jpeg",
   },
   {
     id: 6,
@@ -48,7 +48,7 @@ const teamMembers = [
     lastName: "Issah",
     nickname: "Platini",
     dateOfBirth: "13-12",
-    imageUrl: "/football/emmanuel.jpg",
+    imageUrl: "/football/emmanuel.jpeg",
   },
   {
     id: 7,
@@ -81,6 +81,86 @@ const teamMembers = [
     nickname: "Anorld",
     dateOfBirth: "06-04",
     imageUrl: "/football/ano-edward.jpg",
+  },
+  {
+    id: 11,
+    firstName: "Abdulrazaq",
+    lastName: "Jimoh",
+    nickname: "Rozzo",
+    dateOfBirth: "29-01",
+    imageUrl: "/football/jimoh.jpeg",
+  },
+  {
+    id: 12,
+    firstName: "Alphonsus",
+    lastName: "Ezimoha",
+    nickname: "Alubosaa",
+    dateOfBirth: "06-04",
+    imageUrl: "/football/alphonsus.jpeg",
+  },
+  {
+    id: 13,
+    firstName: "Larry",
+    lastName: "Kadejo Adesola",
+    nickname: "Kowboy",
+    dateOfBirth: "06-04",
+    imageUrl: "/football/larry.jpeg",
+  },
+  {
+    id: 14,
+    firstName: "Bakare",
+    lastName: "Babatunde",
+    nickname: "Keshi",
+    dateOfBirth: "29-01",
+    imageUrl: "/football/bakare.jpeg",
+  },
+  {
+    id: 15,
+    firstName: "Bunmi",
+    lastName: "Busari",
+    nickname: "DiDi Patel",
+    dateOfBirth: "29-04",
+    imageUrl: "/football/bunmi.jpeg",
+  },
+  {
+    id: 16,
+    firstName: "Adekeye",
+    lastName: "Oladipo",
+    nickname: "Ojokojo",
+    dateOfBirth: "01-02",
+    imageUrl: "/football/adekeye.jpeg",
+  },
+  {
+    id: 17,
+    firstName: "Alfred Oladipo",
+    lastName: "Abolarin",
+    nickname: "Asper Conti",
+    dateOfBirth: "26-11",
+    imageUrl: "/football/alfred.jpeg",
+  },
+  {
+    id: 18,
+    firstName: "",
+    lastName: "",
+    nickname: "Aiyeloyun",
+    dateOfBirth: "31-03",
+    imageUrl: "/football/aiyeloyun.jpeg",
+  },
+  {
+    id: 19,
+    firstName: "Sunday",
+    lastName: "Ajadi",
+    nickname: "Barbwire",
+    dateOfBirth: "28-06",
+    imageUrl: "/football/sunday.jpeg",
+  },
+  {
+    id: 20,
+    firstName: "Coach Tunde",
+    lastName: "Alagbe",
+    nickname: "Baba Yeye",
+    dateOfBirth: "10-11",
+    imageUrl: "/football/coach.jpeg",
   },
 ];
 
@@ -203,7 +283,7 @@ function MeetTheTeam() {
               <img
                 src={member.imageUrl}
                 alt={`${member.firstName} ${member.lastName}`}
-                className="w-full h-full object-cover object-top transition-transform duration-300 hover:scale-105"
+                className="w-full h-full object-contain object-top transition-transform duration-300 hover:scale-105"
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-amber-700 to-amber-900">
